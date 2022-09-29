@@ -82,8 +82,6 @@ input {
   color: #999999;
 }
 
-// input[type="search"]::-webkit-search-cancel-button {
-
 input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
   opacity: 0;
   pointer-events: auto;

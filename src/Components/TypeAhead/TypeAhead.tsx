@@ -6,7 +6,6 @@ import Autosuggest from 'react-autosuggest';
 import styles from './TypeAhead.module.scss';
 
 export interface TypeAheadProps {
-  // options: Object[];
   options: Array<any>;
   placeholder?: string;
   label?: string;
@@ -46,7 +45,6 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
     const index = suggestion.label.toLowerCase().indexOf(query.toLowerCase());
     const match = suggestion.label.slice(index, index + query.length)
     const part = suggestion.label.replace(match, `<span style="font-weight: bold;">${match}</span>`);
-    // console.log({ suggestion, query})
 
     return (
       <div>
@@ -56,11 +54,11 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
     )
   };
 
-  const onChange = (event, { newValue }) => {
+  const onChange = ({ newValue }) => {
     setValue(newValue);
   };
 
-  const shouldRenderSuggestions = (value, reason) => {
+  const shouldRenderSuggestions = () => {
     return true;
   }
 
@@ -79,11 +77,6 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
   }
 
   const renderSuggestionsContainer = ({ containerProps, children, query }) => {
-      // console.log({ containerProps, children, query});
-      // console.log(query.length)
-      // console.log({selectedSuggestion});
-      // console.log(children?.props)
-      // console.log(children ? children.length : 'empty')
       if (query.length === 0) setSelectedSuggestion(null);
       if (children?.props.items.length > 0) {
         return (
@@ -100,10 +93,8 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
       }
   };
 
-  const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-    // console.log({ suggestion, suggestionValue})
+  const onSuggestionSelected = ({ suggestion }) => {
     setSelectedSuggestion(suggestion)
-    // console.log({selectedSuggestion})
   }
 
   const inputProps = {
@@ -124,7 +115,6 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
         styles={selectStyles}
       />
       <h2>react-autosuggest</h2>
-      {/* <label>{label}</label> */}
       <Autosuggest
         className={styles.reactSelectContainer}
         suggestions={suggestions}
