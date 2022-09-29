@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import TypeAhead from "./Components/TypeAhead";
 
-function App() {
+export default function App() {
+  const options = [
+    { label: "Adam", value: "Adam" },
+    { label: "Naeem", value: "Naeem" },
+    { label: "Ren", value: "Ren" },
+    { label: "Ryan", value: "Ryan" },
+    { label: "Gaby", value: "Gaby" },
+    { label: "MJ", value: "MJ" },
+    { label: "Fernando", value: "Fernando" }
+  ];
+  const placeholder = "Search for a team member...";
+  const label = "Team Member";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TypeAhead options={options} placeholder={placeholder} isSearchable={true} label={label}/>
   );
 }
-
-export default App;

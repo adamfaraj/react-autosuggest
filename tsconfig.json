@@ -1,0 +1,28 @@
+{
+  "include": ["assets/**/*", "src/**/*", "declarations.d.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "storybook-static",
+    "src/**/*.stories.tsx",
+    "src/**/*.test.tsx"
+  ],
+  "compilerOptions": {
+    "importHelpers": true,
+    "lib": ["dom", "es2019", "es2020.string"],
+    "downlevelIteration": true,
+    "outDir": "dist",
+    "declaration": true,
+    // "declarationDir": "./build",
+    "declarationDir": "dist",
+    "target": "es5",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "baseUrl": ".",
+  }
+}

@@ -6,9 +6,19 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.0.3",
+    "@types/node": "^18.7.18",
+    "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
+    "react-autocomplete": "^1.8.1",
+    "react-autosuggest": "^10.1.0",
+    "react-autowhatever": "^10.2.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.4.0",
+    "react-select-search": "^4.1.2",
+    "sass": "^1.55.0",
+    "typescript": "^4.8.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.21",
+    "tslib": "^2.4.0"
   }
 }
