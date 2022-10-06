@@ -54,7 +54,7 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
     )
   };
 
-  const onChange = ({ newValue }) => {
+  const onChange = (event, { newValue }) => {
     setValue(newValue);
   };
 
