@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
 
-import Select from 'react-select';
 import Autosuggest from 'react-autosuggest';
 
 import styles from './TypeAhead.module.scss';
+
 
 export interface TypeAheadProps {
   options: Array<any>;
   placeholder?: string;
   label?: string;
   isSearchable?: boolean;
+  register: any;
+  fieldName: string;
+  setValue: any;
+  watch: any;
 }
 
-const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: TypeAheadProps) => {
+const TypeAhead = ({ options, watch, register, fieldName, placeholder="Search", label="", isSearchable, setValue }: TypeAheadProps) => {
   const [suggestions, setSuggestions] = useState(options);
-  const [value, setValue] = useState('');
-  const [selectedSuggestion, setSelectedSuggestion] = useState(null);
-
-  const selectStyles = {
-    indicatorSeparator: () => ({ ...styles, display: 'none'})
-  }
-
 
   const getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
@@ -54,18 +51,19 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
     )
   };
 
-  const onChange = (event, { newValue }) => {
-    setValue(newValue);
+  const onChange = (_event, { newValue }) => {
+    console.log()
+    setValue(fieldName, newValue);
   };
-
+  
   const shouldRenderSuggestions = () => {
     return true;
   }
-
+  
   const renderInputComponent = (inputProps) => {
     const { value } = inputProps;
     const hasValue = value !== '' ? styles.close : styles.caret;
-
+    
     return(
       <div className={styles.customInput}>
         <label htmlFor={label}>{label}</label>
@@ -75,46 +73,37 @@ const TypeAhead = ({ options, placeholder="Search", label="", isSearchable }: Ty
       </div>
     )
   }
-
+  const name = watch(fieldName);
   const renderSuggestionsContainer = ({ containerProps, children, query }) => {
-      if (query.length === 0) setSelectedSuggestion(null);
-      if (children?.props.items.length > 0) {
-        return (
-          <div {...containerProps} className={styles.customSuggestionsContainer}>
+    if (children?.props.items.length > 0) {
+      return (
+        <div {...containerProps} className={styles.customSuggestionsContainer}>
             {children}
           </div>
         )
-      } else if (children === null && query.length > 0 && selectedSuggestion === null) {
+      } else if (children === null && query.length > 0 && name === null) {
         return (
           <div {...containerProps} className={styles.noResultsContainer}>
             <span className={styles.noResults} >No Results found.</span>
           </div>
         )
       }
-  };
-
-  const onSuggestionSelected = ({ suggestion }) => {
-    setSelectedSuggestion(suggestion)
+    };
+    
+    const onSuggestionSelected = (_event, { suggestionValue }) => {
+      setValue(fieldName, suggestionValue);
   }
 
   const inputProps = {
     placeholder,
-    value,
+    value: name,
     name: label,
-    onChange: onChange
+    onChange: onChange,
+    ...register(fieldName)
   };
 
   return (
     <>
-      <h2>react-select</h2>
-      <Select
-        className={styles.reactSelectContainer}
-        options={options}
-        isSearchable={isSearchable}
-        placeholder={placeholder}
-        styles={selectStyles}
-      />
-      <h2>react-autosuggest</h2>
       <Autosuggest
         className={styles.reactSelectContainer}
         suggestions={suggestions}
